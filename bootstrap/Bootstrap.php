@@ -7,6 +7,7 @@ use app\dispatchers\DummyEventDispatcher;
 use app\repositories\Hydrator;
 use app\repositories\SqlEmployeeRepository;
 use app\repositories\EmployeeRepository;
+use ProxyManager\Factory\LazyLoadingValueHolderFactory;
 use yii\base\BootstrapInterface;
 use yii\di\Instance;
 
@@ -19,6 +20,8 @@ class Bootstrap implements BootstrapInterface
         $container->setSingleton(EventDispatcher::class, DummyEventDispatcher::class);
 
         $container->setSingleton(Hydrator::class);
+
+        $container->setSingleton(LazyLoadingValueHolderFactory::class);
 
         $container->setSingleton(EmployeeRepository::class, SqlEmployeeRepository::class, [
             Instance::of('db'),
